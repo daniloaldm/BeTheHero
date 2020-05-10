@@ -8,6 +8,7 @@ import api from '../../services/api'
 import './styles.css'
 
 import logoImg from '../../assets/logo.svg'
+import herosImg from '../../assets/heroes.png'
 
 
 export default function Profile() {
@@ -65,8 +66,10 @@ export default function Profile() {
       </header>
 
       <h1>Casos cadastrados</h1>
-
-      <ul>
+      {incidents.length == undefined 
+      ? <p>0 Casos cadastrados!</p>
+    
+      : <ul>
         {incidents.map(incident => (
           <li key={incident.id}>
             <strong>Caso: </strong>
@@ -74,6 +77,7 @@ export default function Profile() {
 
             <strong>DESCRIÇÃO:</strong>
             <p>{incident.description}</p>
+
             <strong>VALOR: </strong>
             <p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(incident.value)}</p>
 
@@ -81,9 +85,8 @@ export default function Profile() {
               <FiTrash2 size={20} color="#a8a8b3" />
             </button>
           </li>
-          
         ))}
-      </ul>
+      </ul>}
     </div>
   );
 }
